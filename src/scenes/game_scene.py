@@ -65,6 +65,39 @@ class GameScene(Scene):
     def _open_bag(self):
         self.game_manager.bag.show()
 
+    def _draw_minimap(self, screen: pg.Surface):
+        if not self.game_manager.player or not self.game_manager.current_map:
+            return
+
+        minimap_size = 200
+        minimap_x = 10
+        minimap_y = 10
+
+        # 看地圖表面
+        map_surface = self.game_manager.current_map._surface
+        map_width = map_surface.get_width()
+        map_height = map_surface.get_height()
+
+        # 縮放比例
+        scale_x = minimap_size / map_width
+        scale_y = minimap_size / map_height
+        scale = min(scale_x, scale_y)
+
+        # minimap
+        scaled_map = pg.transform.scale(map_surface, (int(map_width * scale), int(map_height * scale)))
+        
+        # 畫 minimap
+        screen.blit(scaled_map, (minimap_x, minimap_y))
+
+        # player 在 minimap 的位置
+        player_x = self.game_manager.player.position.x * scale + minimap_x
+        player_y = self.game_manager.player.position.y * scale + minimap_y
+
+        # player: 紅色方塊
+        player_size = 4
+        player_rect = pg.Rect(player_x - player_size // 2, player_y - player_size // 2, player_size, player_size)
+        pg.draw.rect(screen, (255, 0, 0), player_rect)
+
     @override
     def enter(self) -> None:
         sound_manager.play_bgm("RBY 103 Pallet Town.ogg")
@@ -136,3 +169,6 @@ class GameScene(Scene):
         # 放包包與設定按鈕及
         self.bag_button.draw(screen)
         self.setting_button.draw(screen)
+
+        # minimap
+        self._draw_minimap(screen)
