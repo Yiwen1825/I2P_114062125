@@ -43,7 +43,7 @@ class GameManager:
         # Check If you should change scene
         self.should_change_scene = False
         self.next_map = ""
-        
+
         self.exit_positions = {}
         
     @property
@@ -77,7 +77,22 @@ class GameManager:
             if self.player:
             # FIX:因為會回到16,30，退出位置或spawn
                 exit_pos = self.exit_positions.get(self.current_map_key)
-                self.player.position = exit_pos if exit_pos else self.maps[self.current_map_key].spawn
+                if exit_pos:
+                    # 回到map還是進建築物
+                    if self.current_map_key == "map.tmx":
+                        # 回來:往下移
+                        offset_y = GameSettings.TILE_SIZE
+                    else:
+                        # 進入:往上移
+                        offset_y = -GameSettings.TILE_SIZE
+                    
+                    adjusted_pos = Position(
+                        exit_pos.x,
+                        exit_pos.y + offset_y
+                    )
+                    self.player.position = adjusted_pos
+                else:
+                    self.player.position = self.maps[self.current_map_key].spawn
                 
     def check_collision(self, rect: pg.Rect) -> bool:
         if self.maps[self.current_map_key].check_collision(rect):
