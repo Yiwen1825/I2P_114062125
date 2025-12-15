@@ -15,6 +15,7 @@ if TYPE_CHECKING:
 class GameManager:
     # Entities
     player: Player | None
+    exit_positions: dict[str, Position]
     enemy_trainers: dict[str, list[EnemyTrainer]]
     bag: "Bag"
     
@@ -43,6 +44,8 @@ class GameManager:
         self.should_change_scene = False
         self.next_map = ""
         
+        self.exit_positions = {}
+        
     @property
     def current_map(self) -> Map:
         return self.maps[self.current_map_key]
@@ -59,7 +62,10 @@ class GameManager:
         if target not in self.maps:
             Logger.warning(f"Map '{target}' not loaded; cannot switch.")
             return
-        
+        # 記退出位置
+        if self.player:
+            self.exit_positions[self.current_map_key] = self.player.position.copy()
+
         self.next_map = target
         self.should_change_scene = True
             
@@ -69,8 +75,10 @@ class GameManager:
             self.next_map = ""
             self.should_change_scene = False
             if self.player:
-                self.player.position = self.maps[self.current_map_key].spawn
-            
+            # FIX:因為會回到16,30，退出位置或spawn
+                exit_pos = self.exit_positions.get(self.current_map_key)
+                self.player.position = exit_pos if exit_pos else self.maps[self.current_map_key].spawn
+                
     def check_collision(self, rect: pg.Rect) -> bool:
         if self.maps[self.current_map_key].check_collision(rect):
             return True
