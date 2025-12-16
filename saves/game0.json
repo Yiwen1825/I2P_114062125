@@ -132,7 +132,7 @@
             {
             "x": 19.0,
             "y": 2.0,
-            "sprite_path": "character/ow3.png",
+            "sprite_path": "character/ow6.png",
             "classification": "stationary",
             "facing": "DOWN",
             "max_tiles": 3
