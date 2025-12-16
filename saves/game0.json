@@ -10,12 +10,12 @@
         },
         {
           "x": 54,
-          "y": 14,
+          "y": 13,
           "destination": "shop.tmx"
         },
         {
           "x": 55,
-          "y": 31,
+          "y": 30,
           "destination": "delta.tmx"
         }
       ],
@@ -27,26 +27,26 @@
         {
           "x": 24.0,
           "y": 29.0,
+          "sprite_path": "character/ow7.png",
           "classification": "stationary",
           "facing": "DOWN",
-          "max_tiles": 2,
-          "sprite_path":"character/ow7.png"
+          "max_tiles": 2
         },
         {
           "x": 54.0,
           "y": 16.0,
+          "sprite_path": "character/ow5.png",
           "classification": "stationary",
           "facing": "UP",
-          "max_tiles": 2,
-          "sprite_path":"character/ow5.png"
+          "max_tiles": 2
         },
         {
           "x": 31.0,
           "y": 31.0,
+          "sprite_path": "character/ow3.png",
           "classification": "stationary",
           "facing": "UP",
-          "max_tiles": 2,
-          "sprite_path":"character/ow3.png"
+          "max_tiles": 2
         }
       ]
     },
@@ -128,13 +128,23 @@
         "x": 14,
         "y": 18
       },
-      "enemy_trainers": []
+      "enemy_trainers": [
+            {
+            "x": 19.0,
+            "y": 2.0,
+            "sprite_path": "character/ow3.png",
+            "classification": "stationary",
+            "facing": "DOWN",
+            "max_tiles": 3
+            }
+      ]
     }
   ],
   "current_map": "map.tmx",
   "player": {
-    "x": 51.38598237161159,
-    "y": 15.494773736703806
+    "x": 51.0,
+    "y": 15.0,
+    "sprite_path": "character/ow1.png"
   },
   "bag": {
     "monsters": [
