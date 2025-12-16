@@ -3,6 +3,8 @@
 Try to mimic the menu_scene.py or game_scene.py to create this new scene
 '''
 import pygame as pg
+import os
+from shutil import copy
 
 from src.utils import GameSettings
 from src.sprites import BackgroundSprite, Sprite
@@ -76,15 +78,19 @@ class settingScene(Scene):
     def _save_game(self):
         game_scene = scene_manager._scenes.get("game")
         if game_scene:
+            # 先存 game0 再 backup
             game_scene.game_manager.save("saves/game0.json")
+            if os.path.exists("saves/game0.json"):
+                copy("saves/game0.json", "saves/backup.json")
     
     def _load_game(self):
-        loaded = GameManager.load("saves/game0.json")
-        if loaded:
-            game_scene = scene_manager._scenes.get("game")
-            if game_scene:
-                game_scene.game_manager = loaded
-                scene_manager.change_scene("game")
+        if os.path.exists("saves/backup.json"):
+            loaded = GameManager.load("saves/backup.json")
+            if loaded:
+                game_scene = scene_manager._scenes.get("game")
+                if game_scene:
+                    game_scene.game_manager = loaded
+                    scene_manager.change_scene("game")
         
     @override
     def enter(self) -> None:

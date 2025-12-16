@@ -27,6 +27,11 @@ class GameScene(Scene):
             exit(1)
         self.game_manager = manager
         
+        if self.game_manager.player:
+            self.game_manager.current_map_key = "map.tmx"
+            self.game_manager.player.position = self.game_manager.maps["map.tmx"].spawn
+            self.game_manager.exit_positions.clear()
+
         # Online Manager
         if GameSettings.IS_ONLINE:
             self.online_manager = OnlineManager()

@@ -45,6 +45,7 @@ class GameManager:
         self.next_map = ""
 
         self.exit_positions = {}
+        self.player_spawns: dict[str, Position] = {}
         
     @property
     def current_map(self) -> Map:
@@ -104,7 +105,7 @@ class GameManager:
         return False
 
     def encounter_bush(self) -> None:
-        # 10% 機率遇到野生怪物
+        # 5% 機率遇到野生怪物
         if random.random() < 0.05:
             catch_scene = scene_manager._scenes.get("catch")
             if catch_scene:
@@ -134,11 +135,6 @@ class GameManager:
         for key, m in self.maps.items():
             block = m.to_dict()
             block["enemy_trainers"] = [t.to_dict() for t in self.enemy_trainers.get(key, [])]
-            spawn = self.player_spawns.get(key)
-            block["player"] = {
-                "x": spawn["x"] / GameSettings.TILE_SIZE,
-                "y": spawn["y"] / GameSettings.TILE_SIZE
-            }
             map_blocks.append(block)
         return {
             "map": map_blocks,
