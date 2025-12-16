@@ -61,9 +61,9 @@ class Bag:
         if input_manager.key_pressed(pg.K_ESCAPE):
             self.hide()
         
-        if input_manager.key_pressed(pg.K_w) or input_manager.key_pressed(pg.K_UP):
+        if input_manager.key_pressed(pg.K_z):
             self.scroll_monsters_up()
-        if input_manager.key_pressed(pg.K_s) or input_manager.key_pressed(pg.K_DOWN):
+        if input_manager.key_pressed(pg.K_x):
             self.scroll_monsters_down()
 
     def draw(self, screen: pg.Surface):
@@ -98,7 +98,7 @@ class Bag:
         self._draw_items(screen, font_item)
         
         # 操作提示
-        hint_text = font_detail.render("W/S: Scroll | ESC: Close", True, (100, 100, 100))
+        hint_text = font_detail.render("Z/X: Scroll | ESC: Close", True, (100, 100, 100))
         screen.blit(hint_text, (self.panel_x + 40, self.panel_y + 410))
 
     def _draw_monsters(self, screen: pg.Surface, font_item: pg.font.Font, font_detail: pg.font.Font):
