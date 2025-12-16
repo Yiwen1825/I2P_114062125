@@ -11,14 +11,16 @@ class Entity:
     direction: Direction
     position: Position
     game_manager: GameManager
-    
-    def __init__(self, x: float, y: float, game_manager: GameManager) -> None:
+    sprite_path: str
+
+    def __init__(self, x: float, y: float, game_manager: GameManager, sprite_path: str = "character/ow1.png") -> None:
         # Sprite is only for debug, need to change into animations
+        self.sprite_path = sprite_path
         self.animation = Animation(
-            "character/ow1.png", ["down", "left", "right", "up"], 4,
+            sprite_path, ["down", "left", "right", "up"], 4,
             (GameSettings.TILE_SIZE, GameSettings.TILE_SIZE)
         )
-        
+
         self.position = Position(x, y)
         self.direction = Direction.DOWN
         self.animation.update_pos(self.position)
@@ -55,11 +57,12 @@ class Entity:
         return {
             "x": self.position.x / GameSettings.TILE_SIZE,
             "y": self.position.y / GameSettings.TILE_SIZE,
+            "sprite_path": self.sprite_path,
         }
-        
+
     @classmethod
     def from_dict(cls, data: dict[str, float | int], game_manager: GameManager) -> Entity:
         x = float(data["x"])
         y = float(data["y"])
-        return cls(x * GameSettings.TILE_SIZE, y * GameSettings.TILE_SIZE, game_manager)
-        
+        sprite_path = data.get("sprite_path", "character/ow1.png")
+        return cls(x * GameSettings.TILE_SIZE, y * GameSettings.TILE_SIZE, game_manager, sprite_path)

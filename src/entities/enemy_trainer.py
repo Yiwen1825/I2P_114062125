@@ -36,8 +36,9 @@ class EnemyTrainer(Entity):
         classification: EnemyTrainerClassification = EnemyTrainerClassification.STATIONARY,
         max_tiles: int | None = 2,
         facing: Direction | None = None,
+        sprite_path: str = "character/ow1.png",
     ) -> None:
-        super().__init__(x, y, game_manager)
+        super().__init__(x, y, game_manager, sprite_path)
         self.classification = classification
         self.max_tiles = max_tiles
         if classification == EnemyTrainerClassification.STATIONARY:
@@ -129,6 +130,7 @@ class EnemyTrainer(Entity):
         classification = EnemyTrainerClassification(data.get("classification", "stationary"))
         max_tiles = data.get("max_tiles")
         facing_val = data.get("facing")
+        sprite_path = data.get("sprite_path", "character/ow1.png")
         facing: Direction | None = None
         if facing_val is not None:
             if isinstance(facing_val, str):
@@ -144,6 +146,7 @@ class EnemyTrainer(Entity):
             classification,
             max_tiles,
             facing,
+            sprite_path,
         )
 
     @override

@@ -29,21 +29,24 @@
           "y": 29.0,
           "classification": "stationary",
           "facing": "DOWN",
-          "max_tiles": 2
+          "max_tiles": 2,
+          "sprite_path":"character/ow7.png"
         },
         {
           "x": 54.0,
           "y": 16.0,
           "classification": "stationary",
           "facing": "UP",
-          "max_tiles": 2
+          "max_tiles": 2,
+          "sprite_path":"character/ow5.png"
         },
         {
           "x": 31.0,
           "y": 31.0,
           "classification": "stationary",
           "facing": "UP",
-          "max_tiles": 2
+          "max_tiles": 2,
+          "sprite_path":"character/ow3.png"
         }
       ]
     },
