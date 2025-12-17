@@ -114,6 +114,12 @@ class BattleScene(Scene):
             {"name": "Caterpie", "hp": 35, "max_hp": 35, "level": 4, "sprite_path": "menu_sprites/menusprite3.png"},
             {"name": "Weedle", "hp": 38, "max_hp": 38, "level": 5, "sprite_path": "menu_sprites/menusprite4.png"},
         ]
+        """
+        wild_monsters = [
+            {"name": "Chou pro", "hp": 200, "max_hp": 200, "level": 20, "sprite_path": "menu_sprites/chou.png"},
+            {"name": "DYY", "hp": 400, "max_hp": 400, "level": 20, "sprite_path": "menu_sprites/DYY.png"},
+        ]
+        """
         self.enemy_monster = random.choice(wild_monsters).copy()
         
         # 載入怪物圖片
