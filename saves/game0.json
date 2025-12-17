@@ -20,8 +20,8 @@
         }
       ],
       "player": {
-        "x": 51.0,
-        "y": 15.0
+        "x": 54.0,
+        "y": 13.0
       },
       "enemy_trainers": [
         {
@@ -48,7 +48,8 @@
           "facing": "UP",
           "max_tiles": 2
         }
-      ]
+      ],
+      "shop_npcs": []
     },
     {
       "path": "gym.tmx",
@@ -73,7 +74,8 @@
         "x": 12,
         "y": 12
       },
-      "enemy_trainers": []
+      "enemy_trainers": [],
+      "shop_npcs": []
     },
     {
       "path": "shop.tmx",
@@ -95,20 +97,19 @@
         }
       ],
       "player": {
-        "x": 12,
-        "y": 12
+        "x": 12.0,
+        "y": 6.0
       },
       "enemy_trainers": [],
       "shop_npcs": [
         {
-          "x": 12,
-          "y": 4,
+          "x": 12.0,
+          "y": 4.0,
+          "sprite_path": "character/ow6.png",
           "facing": "DOWN",
-          "max_tiles": 2,
-          "sprite_path": "character/ow6.png"
+          "max_tiles": 2
         }
-  ]
-      
+      ]
     },
     {
       "path": "delta.tmx",
@@ -139,21 +140,22 @@
         "y": 18
       },
       "enemy_trainers": [
-            {
-            "x": 19.0,
-            "y": 2.0,
-            "sprite_path": "character/ow6.png",
-            "classification": "stationary",
-            "facing": "DOWN",
-            "max_tiles": 3
-            }
-      ]
+        {
+          "x": 19.0,
+          "y": 2.0,
+          "sprite_path": "character/ow6.png",
+          "classification": "stationary",
+          "facing": "DOWN",
+          "max_tiles": 3
+        }
+      ],
+      "shop_npcs": []
     }
   ],
-  "current_map": "map.tmx",
+  "current_map": "shop.tmx",
   "player": {
-    "x": 51.0,
-    "y": 15.0,
+    "x": 12.339999999999995,
+    "y": 6.0,
     "sprite_path": "character/ow1.png"
   },
   "bag": {
@@ -216,12 +218,12 @@
       },
       {
         "name": "Coins",
-        "count": 3,
+        "count": 2650,
         "sprite_path": "ingame_ui/coin.png"
       },
       {
         "name": "Pokeball",
-        "count": 10,
+        "count": 6,
         "sprite_path": "ingame_ui/ball.png"
       }
     ]
