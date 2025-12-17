@@ -116,7 +116,7 @@ class Map:
         for layer in self.tmxdata.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer) and "PokemonBush".lower() in layer.name.lower():
                 for x, y, gid in layer:
-                    if gid != 0: # TODO: 沙灘被算了要改
+                    if gid != 0:
                         rect = pg.Rect(
                             x * GameSettings.TILE_SIZE,
                             y * GameSettings.TILE_SIZE,
