@@ -16,6 +16,7 @@ class GameScene(Scene):
     sprite_online: Sprite
     bag_button: Button
     setting_button: Button
+    gps_button: Button
     return_to: str
     
     def __init__(self):
@@ -60,8 +61,18 @@ class GameScene(Scene):
             width=button_size,
             height=button_size,
         )
+        self.gps_button = Button(
+            img_path="UI/raw/UI_Flat_Button02a_4.png",
+            img_hovered_path="UI/raw/UI_Flat_Button02a_1.png",
+            x=screen_width - 3 * button_size - 3 * margin,  
+            y=margin,
+            width=button_size,
+            height=button_size,
+        )
+
         self.setting_button.on_click = lambda: self._open_settings()
         self.bag_button.on_click = lambda: self._open_bag()
+        self.gps_button.on_click = lambda: self._open_gps()
     
     def _open_settings(self):
         setting_scene = scene_manager._scenes["settings"]
@@ -69,6 +80,9 @@ class GameScene(Scene):
         scene_manager.change_scene("settings")
     def _open_bag(self):
         self.game_manager.bag.show()
+
+    def _open_gps(self):
+        self.game_manager.gps.toggle_panel()
 
     def _draw_minimap(self, screen: pg.Surface):
         if not self.game_manager.player or not self.game_manager.current_map:
@@ -130,6 +144,7 @@ class GameScene(Scene):
         # Update others
         self.game_manager.bag.update(dt)
         self.game_manager.shop.update(dt)
+        self.game_manager.gps.update(dt, self.game_manager)
         
         if self.game_manager.player is not None and self.online_manager is not None:
             _ = self.online_manager.update(
@@ -141,6 +156,7 @@ class GameScene(Scene):
         # 更新按鈕與狀態
         self.bag_button.update(dt)
         self.setting_button.update(dt)
+        self.gps_button.update(dt)
         
     @override
     def draw(self, screen: pg.Surface):        
@@ -167,6 +183,7 @@ class GameScene(Scene):
 
         self.game_manager.bag.draw(screen)
         self.game_manager.shop.draw(screen)
+        self.game_manager.gps.draw(screen, camera)
         
         if self.online_manager and self.game_manager.player:
             list_online = self.online_manager.get_list_players()
@@ -177,9 +194,10 @@ class GameScene(Scene):
                     self.sprite_online.update_pos(pos)
                     self.sprite_online.draw(screen)
 
-        # 放包包與設定按鈕及
+        # 放包包與設定及GPS按鈕
         self.bag_button.draw(screen)
         self.setting_button.draw(screen)
+        self.gps_button.draw(screen)
 
         # minimap
         self._draw_minimap(screen)

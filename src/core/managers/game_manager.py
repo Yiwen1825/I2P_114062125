@@ -13,6 +13,7 @@ if TYPE_CHECKING:
     from src.entities.shop_npc import ShopNPC
     from src.data.bag import Bag
     from src.data.shop import Shop
+    from src.data.gps import GPS
 
 class GameManager:
     # Entities
@@ -22,6 +23,7 @@ class GameManager:
     shop_npcs: dict[str, list["ShopNPC"]]
     shop: "Shop"
     bag: "Bag"
+    gps: "GPS"
     
     # Map properties
     current_map_key: str
@@ -38,6 +40,7 @@ class GameManager:
                      
         from src.data.bag import Bag
         from src.data.shop import Shop
+        from src.data.gps import GPS
         # Game Properties
         self.maps = maps
         self.current_map_key = start_map
@@ -47,6 +50,7 @@ class GameManager:
 
         self.shop_npcs = {}
         self.shop = Shop()
+        self.gps = GPS()
         
         # Check If you should change scene
         self.should_change_scene = False
