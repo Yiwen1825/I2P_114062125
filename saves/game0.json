@@ -98,7 +98,17 @@
         "x": 12,
         "y": 12
       },
-      "enemy_trainers": []
+      "enemy_trainers": [],
+      "shop_npcs": [
+        {
+          "x": 12,
+          "y": 4,
+          "facing": "DOWN",
+          "max_tiles": 2,
+          "sprite_path": "character/ow6.png"
+        }
+  ]
+      
     },
     {
       "path": "delta.tmx",

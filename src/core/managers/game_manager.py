@@ -10,13 +10,17 @@ if TYPE_CHECKING:
     from src.maps.map import Map
     from src.entities.player import Player
     from src.entities.enemy_trainer import EnemyTrainer
+    from src.entities.shop_npc import ShopNPC
     from src.data.bag import Bag
+    from src.data.shop import Shop
 
 class GameManager:
     # Entities
     player: Player | None
     exit_positions: dict[str, Position]
     enemy_trainers: dict[str, list[EnemyTrainer]]
+    shop_npcs: dict[str, list["ShopNPC"]]
+    shop: "Shop"
     bag: "Bag"
     
     # Map properties
@@ -33,12 +37,16 @@ class GameManager:
                  bag: Bag | None = None):
                      
         from src.data.bag import Bag
+        from src.data.shop import Shop
         # Game Properties
         self.maps = maps
         self.current_map_key = start_map
         self.player = player
         self.enemy_trainers = enemy_trainers
         self.bag = bag if bag is not None else Bag([], [])
+
+        self.shop_npcs = {}
+        self.shop = Shop()
         
         # Check If you should change scene
         self.should_change_scene = False
@@ -50,6 +58,10 @@ class GameManager:
     @property
     def current_map(self) -> Map:
         return self.maps[self.current_map_key]
+    
+    @property
+    def current_shop_npcs(self) -> list["ShopNPC"]:
+        return self.shop_npcs.get(self.current_map_key, [])
         
     @property
     def current_enemy_trainers(self) -> list[EnemyTrainer]:
@@ -135,6 +147,7 @@ class GameManager:
         for key, m in self.maps.items():
             block = m.to_dict()
             block["enemy_trainers"] = [t.to_dict() for t in self.enemy_trainers.get(key, [])]
+            block["shop_npcs"] = [npc.to_dict() for npc in self.shop_npcs.get(key, [])]
             map_blocks.append(block)
         return {
             "map": map_blocks,
@@ -149,6 +162,7 @@ class GameManager:
         from src.entities.player import Player
         from src.entities.enemy_trainer import EnemyTrainer
         from src.data.bag import Bag
+        from src.entities.shop_npc import ShopNPC
         
         Logger.info("Loading maps")
         maps_data = data["map"]
@@ -176,9 +190,14 @@ class GameManager:
         
         Logger.info("Loading enemy trainers")
         for m in data["map"]:
-            raw_data = m["enemy_trainers"]
+            raw_data = m.get("enemy_trainers", [])
             gm.enemy_trainers[m["path"]] = [EnemyTrainer.from_dict(t, gm) for t in raw_data]
-        
+
+        Logger.info("Loading shop NPCs")
+        for m in data["map"]:
+            raw_data = m.get("shop_npcs", [])
+            gm.shop_npcs[m["path"]] = [ShopNPC.from_dict(npc, gm) for npc in raw_data]
+
         Logger.info("Loading Player")
         if data.get("player"):
             gm.player = Player.from_dict(data["player"], gm)

@@ -124,9 +124,12 @@ class GameScene(Scene):
             self.game_manager.player.update(dt)
         for enemy in self.game_manager.current_enemy_trainers:
             enemy.update(dt)
+        for npc in self.game_manager.current_shop_npcs:
+            npc.update(dt)
             
         # Update others
         self.game_manager.bag.update(dt)
+        self.game_manager.shop.update(dt)
         
         if self.game_manager.player is not None and self.online_manager is not None:
             _ = self.online_manager.update(
@@ -159,8 +162,11 @@ class GameScene(Scene):
             self.game_manager.current_map.draw(screen, camera)
         for enemy in self.game_manager.current_enemy_trainers:
             enemy.draw(screen, camera)
+        for npc in self.game_manager.current_shop_npcs:
+            npc.draw(screen, camera)
 
         self.game_manager.bag.draw(screen)
+        self.game_manager.shop.draw(screen)
         
         if self.online_manager and self.game_manager.player:
             list_online = self.online_manager.get_list_players()
