@@ -37,8 +37,8 @@ class Shop:
         ]
         
         self.shop_inventory = []
-        self.last_refresh_time = time.time()
-        self.refresh_interval = 3600
+        self.refresh_interval = 1800
+        self.last_refresh_time = self._get_next_refresh_time()
         
         self.shop_panel = Sprite("UI/raw/UI_Flat_Frame03a.png", (600, 450))
         self.item_banner = Sprite("UI/raw/UI_Flat_Banner03a.png", (500, 80))
@@ -79,6 +79,10 @@ class Shop:
             self.buy_buttons.append(button)
     
     def _refresh_inventory(self):
+        current_time = time.time()
+        while current_time >= self.last_refresh_time:
+            self.last_refresh_time += self.refresh_interval
+
         self.shop_inventory = []
         
         num_items = random.randint(3, 5)
@@ -94,20 +98,27 @@ class Shop:
                 "description": item_template["description"]
             })
         
-        self.last_refresh_time = time.time()
-        
         if hasattr(self, 'panel_x'):
             self._create_buy_buttons()
     
     def _check_refresh(self):
         current_time = time.time()
-        if current_time - self.last_refresh_time >= self.refresh_interval:
+        if current_time >= self.last_refresh_time:
             self._refresh_inventory()
     
+    def _get_next_refresh_time(self) -> float:
+        current_time = time.time()
+        local_time = time.localtime(current_time)
+        seconds_since_midnight = local_time.tm_hour * 3600 + local_time.tm_min * 60 + local_time.tm_sec
+        current_half_hour = seconds_since_midnight // 1800
+        next_half_hour_seconds = (current_half_hour + 1) * 1800
+        midnight = current_time - seconds_since_midnight
+        next_refresh = midnight + next_half_hour_seconds
+        return next_refresh
+
     def _get_time_until_refresh(self) -> tuple[int, int, int]:
         current_time = time.time()
-        elapsed = current_time - self.last_refresh_time
-        remaining = max(0, self.refresh_interval - elapsed)
+        remaining = max(0, self.last_refresh_time - current_time)
         
         hours = int(remaining // 3600)
         minutes = int((remaining % 3600) // 60)
