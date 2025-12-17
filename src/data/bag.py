@@ -83,6 +83,7 @@ class Bag:
         font_title = pg.font.Font("assets/fonts/Minecraft.ttf", 50)
         font_item = pg.font.Font("assets/fonts/Minecraft.ttf", 18)
         font_detail = pg.font.Font("assets/fonts/Minecraft.ttf", 10)
+        font_small = pg.font.Font("assets/fonts/Minecraft.ttf", 20)
         
         # 標題
         title_text = font_title.render("BAG", True, (0, 0, 0))
@@ -98,8 +99,12 @@ class Bag:
         self._draw_items(screen, font_item)
         
         # 操作提示
-        hint_text = font_detail.render("Z/X: Scroll | ESC: Close", True, (100, 100, 100))
+        hint_text = font_detail.render("Z/X: Scroll", True, (100, 100, 100))
         screen.blit(hint_text, (self.panel_x + 40, self.panel_y + 410))
+
+        hint_text2 = font_small.render("Press ESC to close", True, (200, 200, 200))
+        hint_x = (GameSettings.SCREEN_WIDTH - hint_text2.get_width()) // 2
+        screen.blit(hint_text2, (hint_x, GameSettings.SCREEN_HEIGHT - 60))
 
     def _draw_monsters(self, screen: pg.Surface, font_item: pg.font.Font, font_detail: pg.font.Font):
         monster_box_x = self.panel_x + 30

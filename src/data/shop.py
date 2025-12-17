@@ -206,7 +206,7 @@ class Shop:
         font_title = pg.font.Font("assets/fonts/Minecraft.ttf", 50)
         font_item = pg.font.Font("assets/fonts/Minecraft.ttf", 18)
         font_detail = pg.font.Font("assets/fonts/Minecraft.ttf", 14)
-        font_small = pg.font.Font("assets/fonts/Minecraft.ttf", 12)
+        font_small = pg.font.Font("assets/fonts/Minecraft.ttf", 20)
         
         title_text = font_title.render("SHOP", True, (0, 0, 0))
         screen.blit(title_text, (self.panel_x + 30, self.panel_y + 25))
@@ -230,7 +230,8 @@ class Shop:
             button.draw(screen)
 
         hint_text = font_small.render("Press ESC to close", True, (200, 200, 200))
-        screen.blit(hint_text, (self.panel_x + 40, self.panel_y + 410))
+        hint_x = (GameSettings.SCREEN_WIDTH - hint_text.get_width()) // 2
+        screen.blit(hint_text, (hint_x, GameSettings.SCREEN_HEIGHT - 60))
     
     def _draw_items(self, screen: pg.Surface, font_item: pg.font.Font, font_detail: pg.font.Font):
         items_x = self.panel_x + 50
