@@ -62,8 +62,8 @@ class GameScene(Scene):
             height=button_size,
         )
         self.gps_button = Button(
-            img_path="UI/raw/UI_Flat_Button02a_4.png",
-            img_hovered_path="UI/raw/UI_Flat_Button02a_1.png",
+            img_path="UI/raw/gps.png",
+            img_hovered_path="UI/raw/gps_hover.png",
             x=screen_width - 3 * button_size - 3 * margin,  
             y=margin,
             width=button_size,
