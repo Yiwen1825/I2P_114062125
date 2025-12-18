@@ -13,14 +13,16 @@ class Player:
     x: float
     y: float
     map: str
+    direction: str
     last_update: float
 
-    def update(self, x: float, y: float, map: str) -> None:
-        if x != self.x or y != self.y or map != self.map:
+    def update(self, x: float, y: float, map: str, direction: str = "DOWN") -> None:
+        if x != self.x or y != self.y or map != self.map or direction != self.direction:
             self.last_update = time.monotonic()
         self.x = x
         self.y = y
         self.map = map
+        self.direction = direction
 
     def is_inactive(self) -> bool:
         now = time.monotonic()
@@ -72,16 +74,20 @@ class PlayerHandler:
         with self._lock:
             pid = self._next_id
             self._next_id += 1
-            self.players[pid] = Player(pid, 0.0, 0.0, "", time.monotonic())
+            self.players[pid] = Player(pid, 0.0, 0.0, "", "DOWN", time.monotonic())
             return pid
+    
+    def unregister(self, pid: int) -> None:
+        with self._lock:
+            self.players.pop(pid, None)
 
-    def update(self, pid: int, x: float, y: float, map_name: str) -> bool:
+    def update(self, pid: int, x: float, y: float, map_name: str, direction: str = "DOWN") -> bool:
         with self._lock:
             p = self.players.get(pid)
             if not p:
                 return False
             else:
-                p.update(float(x), float(y), str(map_name))
+                p.update(float(x), float(y), str(map_name), str(direction))
                 return True
 
     def list_players(self) -> dict:
@@ -92,6 +98,7 @@ class PlayerHandler:
                     "id": p.id,
                     "x": p.x,
                     "y": p.y,
-                    "map": p.map
+                    "map": p.map,
+                    "direction": p.direction
                 }
             return player_list

@@ -98,7 +98,7 @@
       ],
       "player": {
         "x": 12.0,
-        "y": 6.0
+        "y": 14.0
       },
       "enemy_trainers": [],
       "shop_npcs": [
@@ -152,10 +152,10 @@
       "shop_npcs": []
     }
   ],
-  "current_map": "shop.tmx",
+  "current_map": "map.tmx",
   "player": {
-    "x": 12.339999999999995,
-    "y": 6.0,
+    "x": 16.81327605175989,
+    "y": 29.480000000000018,
     "sprite_path": "character/ow1.png"
   },
   "bag": {

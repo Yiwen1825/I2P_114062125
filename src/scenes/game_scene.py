@@ -150,7 +150,8 @@ class GameScene(Scene):
             _ = self.online_manager.update(
                 self.game_manager.player.position.x, 
                 self.game_manager.player.position.y,
-                self.game_manager.current_map.path_name
+                self.game_manager.current_map.path_name,
+                self.game_manager.player.direction.name
             )
 
         # 更新按鈕與狀態
@@ -191,6 +192,7 @@ class GameScene(Scene):
                 if player["map"] == self.game_manager.current_map.path_name:
                     cam = self.game_manager.player.camera
                     pos = cam.transform_position_as_position(Position(player["x"], player["y"]))
+                    direction = player.get("direction", "DOWN")
                     self.sprite_online.update_pos(pos)
                     self.sprite_online.draw(screen)
 
