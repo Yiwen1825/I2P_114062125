@@ -27,6 +27,16 @@ class Shop:
                 "price": 50,
                 "sprite_path": "ingame_ui/potion.png",
                 "description": "Restores 20 HP"
+            },{
+                "name": "Atk_Potion",
+                "price": 50,
+                "sprite_path": "ingame_ui/attack_potion.png",
+                "description": "+5 Attack"
+            },{
+                "name": "Def_Potion",
+                "price": 50,
+                "sprite_path": "ingame_ui/defense_potion.png",
+                "description": "The opponent loses 1 attack"
             },
             {
                 "name": "Pokeball",
