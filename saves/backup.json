@@ -154,8 +154,8 @@
   ],
   "current_map": "map.tmx",
   "player": {
-    "x": 16.81327605175989,
-    "y": 29.480000000000018,
+    "x": 54.0,
+    "y": 15.0,
     "sprite_path": "character/ow1.png"
   },
   "bag": {
@@ -165,6 +165,7 @@
         "hp": 85,
         "max_hp": 100,
         "level": 25,
+        "atk": 20,
         "sprite_path": "menu_sprites/menusprite1.png"
       },
       {
@@ -172,6 +173,7 @@
         "hp": 150,
         "max_hp": 200,
         "level": 36,
+        "atk": 20,
         "sprite_path": "menu_sprites/menusprite2.png"
       },
       {
@@ -179,6 +181,7 @@
         "hp": 120,
         "max_hp": 180,
         "level": 32,
+        "atk": 20,
         "sprite_path": "menu_sprites/menusprite3.png"
       },
       {
@@ -186,6 +189,7 @@
         "hp": 90,
         "max_hp": 160,
         "level": 30,
+        "atk": 20,
         "sprite_path": "menu_sprites/menusprite4.png"
       },
       {
@@ -193,6 +197,7 @@
         "hp": 110,
         "max_hp": 140,
         "level": 28,
+        "atk": 20,
         "sprite_path": "menu_sprites/menusprite5.png"
       },
       {
@@ -200,6 +205,7 @@
         "hp": 180,
         "max_hp": 220,
         "level": 40,
+        "atk": 20,
         "sprite_path": "menu_sprites/menusprite6.png"
       },
       {
@@ -207,6 +213,7 @@
         "hp": 35,
         "max_hp": 35,
         "level": 4,
+        "atk": 20,
         "sprite_path": "menu_sprites/menusprite3.png"
       }
     ],
@@ -218,13 +225,23 @@
       },
       {
         "name": "Coins",
-        "count": 2650,
+        "count": 2550,
         "sprite_path": "ingame_ui/coin.png"
       },
       {
         "name": "Pokeball",
         "count": 6,
         "sprite_path": "ingame_ui/ball.png"
+      },
+      {
+        "name": "Def_Potion",
+        "count": 0,
+        "sprite_path": "ingame_ui/defense_potion.png"
+      },
+      {
+        "name": "Atk_Potion",
+        "count": 0,
+        "sprite_path": "ingame_ui/attack_potion.png"
       }
     ]
   }
